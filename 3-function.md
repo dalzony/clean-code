@@ -59,17 +59,23 @@
  #### 많이 쓰는 단항 형식
 
   * 인수에게 질문을 던지는 경우
-  ```
-  boolean fileExist("TestFile")
-  ```
+
+	  ```
+	  boolean fileExist("TestFile")
+	  ```
+
   * 인수를 변환하여 결과를 반환하는 경우
-  ```
-  InputStream fileOpen("TestFile")
-  ```
+	
+	  ```
+	  InputStream fileOpen("TestFile")
+	  ```
+
   * (드물게)출력 인수가 없는 이벤트 형식
-  ```
-  passwordAttemptFailedNtimes(int attempts)
-  ```
+	
+	  ```
+	  passwordAttemptFailedNtimes(int attempts)
+	  ```
+	
   => 이벤트는 코드에 드러나도록 이름과 문맥에 주의!
 
  #### 플래그 인수
@@ -89,35 +95,40 @@
  #### 인수 객체
 
   * 인수가 2-3개 필요하다면 독자적인 클래스 변수를 고민해보자.
-  ```
-  Circle makeCircle(double x, double y, double radius);
-  Circle makeCircle(Point center, double radius); // 조금 더 의미를 담을 수 있다.
-  ```
+  
+	  ```
+	  Circle makeCircle(double x, double y, double radius);
+	  Circle makeCircle(Point center, double radius); // 조금 더 의미를 담을 수 있다.
+	  ```
 
  #### 인수 목록
 
   * 가변인수가 동등하다면 List 형 인수 하나로 취급하자.
-  ```
-  public String format(String format, Object... args)
-  ```
+  
+	  ```
+	  public String format(String format, Object... args)
+	  ```
 
  #### 동사와 키워드
 
   * 단항함수: 함수와 인수가 동사/명사 쌍으로 ex) wirte(name)
   * 함수 이름에 키워드 넣기
-  ```
-  assertEquals(expected, actual);
-  assertExpectedEqualsActual(expected, actual); // 인수를 기억 할 필요가 없어진다.
-  ```
+  
+	  ```
+	  assertEquals(expected, actual);
+	  
+	  assertExpectedEqualsActual(expected, actual); // 인수를 기억 할 필요가 없어진다.
+	  ```
 
 ## 부수 효과를 일으키지 마라!
 
   * 함수에선 한가지 일만 하자. ex) 클래스 변수 수정, 인수 수정, 전역변수 수정 등등
   * 출력 인수
-  ```
-  appendFooter(s);
-  s.appendFooter(); # s에 Footer가 붙을 것이란게 더 명확하게 표현된다.
-  ```
+	
+	  ```
+	  appendFooter(s);
+	  s.appendFooter(); # s에 Footer가 붙을 것이란게 더 명확하게 표현된다.
+	  ```
 
 ## 명령과 조회를 분리하라!
 
@@ -132,6 +143,7 @@
   * 오류 처리도 한가지 작업이다. 오류 처리하는 함수는 오류만 처리한다.
   * 오류코드를 정의해서 오류코드를 반환하지 말자.
   * Try/Catch 블록 뽑아내기
+  
   ```
   public void delete(Page page) {
     try {
