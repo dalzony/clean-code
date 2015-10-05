@@ -47,7 +47,11 @@
 
 응집도가 높다 == 클래스에 속한 메소드와 변수가 서로 의존하며 논리적인 단위로 묶인다는 의미이다.
 
-Q. Big(1)을 유지하는 클래스를 많이 짜라는 의도인가? (변수 갯수 => 1)
+응집도는 최대한 높게 유지하자.
+
+```
+=> 하나의 클래스에서는 하나(n)의 인스턴스 변수를 최대한 이용하고 관련있는 메서드들이 뭉쳐있어야한다.
+```
 
 
 #### 응집도를 유지하면 작은 클래스 여럿이 나온다.
@@ -62,6 +66,72 @@ Q. Big(1)을 유지하는 클래스를 많이 짜라는 의도인가? (변수 �
 ### 변경하기 쉬운 클래스
 
 책 참고
+
+``` java
+public class PrintPrimes {
+    public static void main(String[] args) {
+        final int M = 1000;
+        final int RR = 50;
+        final int CC = 4;
+        final int WW = 10;
+        final int ORDMAX = 30;
+        int P[] = new int[M + 1];
+        int PAGENUMBER;
+        int PAGEOFFSET;
+        int ROWOFFSET;
+        int C;
+        int J;
+        int K;
+        boolean JPRIME;
+        int ORD;
+        int SQUARE;
+        int N;
+        int MULT[] = new int[ORDMAX + 1];
+        J = 1;
+        K = 1;
+        P[1] = 2;
+        ORD = 2;
+        SQUARE = 9;
+        while (K < M) {
+            do {
+                J = J + 2;
+                if (J == SQUARE) {
+                    ORD = ORD + 1;
+                    SQUARE = P[ORD] * P[ORD];
+                    MULT[ORD - 1] = J;
+                }
+                N = 2;
+                JPRIME = true;
+                while (N < ORD && JPRIME) {
+                    while (MULT[N] < J)
+                        MULT[N] = MULT[N] + P[N] + P[N];
+                    if (MULT[N] == J) JPRIME = false;
+                    N = N + 1;
+                }}
+            while (!JPRIME) ;
+            K = K + 1;
+            P[K] = J;
+            PAGENUMBER = 1;
+            PAGEOFFSET = 1;
+            
+            while (PAGEOFFSET <= M) {
+                System.out.println("The First " + M + " Prime Numbers --- Page " + PAGENUMBER);
+                System.out.println("");
+                for (ROWOFFSET = PAGEOFFSET; ROWOFFSET < PAGEOFFSET + RR;
+                     ROWOFFSET++) {
+                    for (C = 0; C < CC; C++)
+                        if (ROWOFFSET + C * RR <= M) System.out.format("%10d", P[ROWOFFSET + C * RR]);
+                    System.out.println("");
+                }
+                System.out.println("\f");
+                PAGENUMBER = PAGENUMBER + 1;
+                PAGEOFFSET = PAGEOFFSET + RR * CC;
+            }
+        }
+    }
+}
+
+```
 
 ### 변경으로부터 격리
 
